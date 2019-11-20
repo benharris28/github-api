@@ -15,8 +15,8 @@ function displayResults(responseJson) {
     for (let i = 0; i < responseJson.length; i++){
      
       $('#results-list').append(
-        `<li><h3><a href="${responseJson[i].html_url}">${responseJson[i].html_url}</a></h3>
-        <p>${responseJson[i].html_url}</p>
+        `<li><h3><a href="${responseJson[i].html_url}">${responseJson[i].name}</a></h3>
+        <p>${responseJson[i].description}</p>
         </li>`
       )};
     //display the results section  
@@ -37,11 +37,10 @@ function displayResults(responseJson) {
     fetch(url, options)
       .then(response => {
         if (response.ok) {
-          return response.json();
+            return response.json();
         }
         throw new Error(response.statusText);
       })
-      .then(responseJson => console.log(responseJson))
       .then(responseJson => displayResults(responseJson))
       .catch(err => {
         $('#js-error-message').text(`Something went wrong: ${err.message}`);
